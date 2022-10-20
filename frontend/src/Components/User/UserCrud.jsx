@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import Axios from 'axios'
 import Main from "../Template/Main"
 
+/*
+    PASSAR AS FUNCTION ONCLICK PARA UM CONSTRUCTOR
+    CRIAR UM COMPONENT PARA O FORM
+*/
+
 const headerProps = {
     icone: 'users',
     titulo: 'Usuarios',
@@ -30,7 +35,7 @@ export default class Crud extends Component {
         Axios[method](url, user)
             .then(resp => {
                 const list = this.getUpdatedList(resp.data)
-                this.setState({user: initalState.user, list})
+                this.setState({ user: initalState.user, list })
             })
     }
 
@@ -40,10 +45,52 @@ export default class Crud extends Component {
         return list
     }
 
+    updateFild(event) {
+        const user = { ...this.state.user }
+        user[event.target.name] = event.target.value
+        this.setState({ user })
+    }
+
+    renderForm() {
+        return (
+            <div className="form">
+                <div className="row">
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>Nome</label>
+                            <input type="text" className="form-control" name="name"
+                                value={this.state.user.name} onChange={e => this.updateFild(e)}
+                                placeholder="Digite seu nome" />
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6">
+                        <div className="form-group">
+                            <label>Nome</label>
+                            <input type="text" className="form-control" name="email"
+                                value={this.state.user.email} onChange={e => this.updateFild(e)}
+                                placeholder="Digite seu email" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div className="row">
+                    <div className="col-12 d-flex justify-content-end">
+                        <button className="btn btn-primary" onClick={e => this.save(e)}>
+                            Salvar
+                        </button>
+                        <button className="btn btn-secondary ml-2" onClick={e => this.clear(e)}>
+                            cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         return (
             <Main {...headerProps}>
-                Cadastro de usuários
+                {this.renderForm()}
             </Main>
         )
     }
