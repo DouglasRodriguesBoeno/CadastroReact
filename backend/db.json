@@ -1,14 +1,9 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Rodrigo Caio",
-      "email": "rodrigocaio@email.com"
-    },
-    {
-      "id": 2,
-      "name": "Eduardo Caio",
-      "email": "eduardogocaio@email.com"
+      "name": "JoaninhaSilva",
+      "email": "Joaninha@email.com",
+      "id": 2
     },
     {
       "name": "Douglas Rodrigues Boeno ",
